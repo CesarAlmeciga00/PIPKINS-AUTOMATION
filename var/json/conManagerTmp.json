@@ -1,0 +1,31 @@
+[
+    {
+        "id": "ConexionDestino",
+        "ip": "172.70.7.60",
+        "port": "3306",
+        "user": "cesaralmeciga5850",
+        "password": "U@SXQFNiEeShz66wxgzt",
+        "bbdd": "bbdd_groupcos_repositorio_pipkins"
+    },
+    {
+        "id": "ConexionOrigen",
+        "ip": "172.70.7.60",
+        "port": "3306",
+        "user": "cesaralmeciga5850",
+        "password": "U@SXQFNiEeShz66wxgzt",
+        "bbdd": "bbdd_repositorio_tipificaciones_appmaster_mios_v2"
+    },
+    {
+        "id": "ConexionLog",
+        "ip": "172.70.7.60",
+        "port": "3306",
+        "user": "cesaralmeciga5850",
+        "password": "U@SXQFNiEeShz66wxgzt",
+        "bbdd": "bbdd_groupcos_dba"
+    },
+    {
+        "id": "PipkinsCredentials",
+        "user": "cesaralmeciga5850",
+        "password": "U@SXQFNiEeShz66wxgzt"
+    }
+]
