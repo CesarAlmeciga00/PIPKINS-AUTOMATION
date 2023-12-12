@@ -90,6 +90,84 @@ class agentDetailMetro:
         nuevo_nombre = r'C:\DESARROLLOS\WEB_SCRAPPING\METRO\files\agentDetail.xlsx'
 
         os.rename(nombre_original, nuevo_nombre)
+
+
+    def downloadData2(dateInicio, dateFinal, pipkinsUser, pipkinsPassword):
+        try:
+            file = r'C:\DESARROLLOS/WEB_SCRAPPING\METRO\files\Report-ManualRTA.xlsx'
+            os.remove(file)
+        except:
+            pass
+        try:
+            file = r'C:\DESARROLLOS/WEB_SCRAPPING\METRO\files\agentDetail.xlsx'
+            os.remove(file)
+        except:
+            pass
+        service = Service(executable_path='drivers/chromedriver.exe')
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("window-size=1920x1080")
+        options.add_experimental_option("prefs", {
+            "download.default_directory": r"C:\DESARROLLOS\WEB_SCRAPPING\METRO\files"
+        })
+        driver = webdriver.Chrome(service=service, options=options)
+        
+        time.sleep(2)
+        driver.get("https://www.workforcescheduling.com/onetouch") 
+        driver.switch_to.frame("MAINWINDOW")
+        time.sleep(2)
+        user = driver.find_element(by=By.XPATH, value='//*[@id="StaffID"]')
+        user.send_keys(pipkinsUser)
+        password = driver.find_element(by=By.XPATH, value='//*[@id="Pin"]')
+        password.send_keys(pipkinsPassword)
+        login = driver.find_element(by=By.XPATH, value='//*[@id="login"]')
+        login.click()
+        time.sleep(10)
+        driver.switch_to.default_content()
+        driver.switch_to.frame("HEADER")
+        reports = driver.find_element(by=By.XPATH, value='/html/body/table/tbody/tr[3]/td[2]')
+        reports.click()
+        time.sleep(4)
+        manualRTA = driver.find_element(by=By.XPATH, value='//*[@id="outlookContainer"]/div[8]')
+        manualRTA.click()
+        time.sleep(4)
+        driver.switch_to.default_content()
+        driver.switch_to.frame("MAINWINDOW")
+        dateOption = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_ReportPeriod_2"]')
+        dateOption.click()
+        time.sleep(4)
+        agentDetail = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_ReportType_0"]')
+        agentDetail.click()
+        time.sleep(4)
+        dateIni = driver.find_element(by=By.XPATH, value='//*[@id="ctl00_ContentMain_DateRangeStart_DatePicker_dateInput"]')
+        dateIni.click()
+        dateIni.send_keys(dateInicio)
+        dateFin = driver.find_element(by=By.XPATH, value='//*[@id="ctl00_ContentMain_DateRangeEnd_DatePicker_dateInput"]')
+        dateFin.click()
+        dateFin.send_keys(dateFinal)
+        position = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_MaintenanceDepartmentTransfer_AvailableSelect"]/option[3]')
+        driver.execute_script("arguments[0].scrollIntoView();", position)
+        time.sleep(4)
+        actions = ActionChains(driver)
+        optionCol = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_MaintenanceDepartmentTransfer_AvailableSelect"]/option[3]')
+        actions.double_click(optionCol).perform()
+        time.sleep(4)
+        toExcel = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_ExcelReport"]')
+        driver.execute_script("arguments[0].scrollIntoView();", toExcel)
+        time.sleep(4)
+        toExcel.click()
+        genReport = driver.find_element(by=By.XPATH, value='//*[@id="ContentMain_ViewReport"]')
+        driver.execute_script("arguments[0].scrollIntoView();", genReport)
+        time.sleep(4)
+        genReport.click()
+        time.sleep(20)
+        driver.close()
+        nombre_original = r'C:\DESARROLLOS/WEB_SCRAPPING\METRO\files\Report-ManualRTA.xlsx'
+        nuevo_nombre = r'C:\DESARROLLOS\WEB_SCRAPPING\METRO\files\agentDetail.xlsx'
+
+        os.rename(nombre_original, nuevo_nombre)
+
+
     def getData(path):
 
         filename = path
