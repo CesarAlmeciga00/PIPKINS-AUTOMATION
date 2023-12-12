@@ -23,7 +23,8 @@ class agentDetailMetro:
             pass
         service = Service(executable_path='drivers/chromedriver.exe')
         options = webdriver.ChromeOptions()
-        options.add_argument("--start-maximized")
+        options.add_argument("--headless")
+        options.add_argument("window-size=1920x1080")
         options.add_experimental_option("prefs", {
             "download.default_directory": r"C:\DESARROLLOS\WEB_SCRAPPING\METRO\files"
         })

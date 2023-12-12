@@ -1,5 +1,5 @@
 from agentDetailMetroController import *
 
-interval = 2
+interval = 5
 
 agentDetailMetroController(interval)
