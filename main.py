@@ -1,5 +1,15 @@
 from agentDetailMetroController import *
 
-interval = 5
+interval = 2
 
-agentDetailMetroController(interval)
+
+try:
+    agentDetailMetroController(interval)
+except:
+    print("Descarga Trining fallida")
+
+
+try:
+    agentDetailMetroController2(interval)
+except:
+    print("Descarga Metro telesales fallida")
